@@ -17,18 +17,22 @@ let app = express();
 app.use(express.static('./public'));
 app.set('view engine', 'ejs');  
 app.get('/', async (req, res) => {  
-    //let data = await db.collection('classA').get();
-    //let userArr = []
-    // data.forEach((doc) => {
-    //     console.log(doc.data().name)
-    //     userArr.push(doc.data().name);
-    // })
+    let data = await db.collection('classA').get();
+    let userArr = []
+    data.forEach((doc) => {
+        console.log(doc.data().name)
+        userArr.push(doc.data().name);
+    })
     res.render('default', {  
         title: '首頁',  
-        users: ['Fisheep', 'Fiona', 'Alice', 'Bob']
-        //users: userArr
+        //users: ['Fisheep', 'Fiona', 'Alice', 'Bob']
+        users: userArr
     });  
 });
+
+app.get("/Daniel",(req,res) => {
+    res.send("<h1>Daniel</h1>");
+})
 
 app.get("/firebase-test", async (req, res) => {
     let html = '';
